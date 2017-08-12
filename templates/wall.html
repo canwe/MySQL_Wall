@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Wall!</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style2.css') }}">
+    <!-- <link rel="stylesheet" type="text/css" href="style2.css"> -->
+
+    <head>
+
+        <body>
+            <div id="wrapper">
+                {% with messages = get_flashed_messages() %} 
+                    {% if messages %} 
+                        {% for message in messages %}
+                <h4>{{message}}</h4>
+                        {% endfor %} 
+                    {% endif %} 
+                {% endwith %}
+
+                <h4> Welcome back {{messages[0]["name"]}}</h4>
+
+                <form action="/message" method="post">
+                    <h4>Post a message:</h4>
+                    <textarea name="message"></textarea>
+                    <input class="btn" type="submit" value="Post">
+                </form>
+                <div id=comments>
+                    {%for message in messages%}
+                        <p> {{message["name"]}} at {{message["update_at"]}} post:</p>
+                        <p2> {{message["data"]}}</p2>
+                        {%for comment in comments%} 
+                            {%if comment["message_id"] == message["id"]%}
+                                <p> {{comment["name"]}} at {{comment["update_at"]}} comment:</p>
+                                <p2> {{comment["data"]}}</p2>
+                            {%endif%} 
+                        {%endfor%}
+                        <!-- <p>Make a comment:</p> -->
+                        <form action="/comment" method="post">
+                            <input type="hidden" name="comment_id" value={{message[ "id"]}}>
+                            <textarea name="comment"></textarea>
+                            <input class="btn" type="submit" value="Comment">
+                        </form>
+                    {%endfor%}
+                </div>
+            </div>
+        </body>
+        </body>
+
+</html>

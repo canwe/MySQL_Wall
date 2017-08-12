@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Submittion successful!</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style2.css') }}">
+    <!-- <link rel="stylesheet" type="text/css" href="style2.css"> -->
+
+    <head>
+
+        <body>
+            {% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %}
+            <h4>{{message}}</h4>
+            {% endfor %} {% endif %} {% endwith %}
+
+            <form action='/wall' method='post'>
+                <input id='post' type='submit' value='to the Wall'>
+            </form>
+        </body>
+
+</html>
